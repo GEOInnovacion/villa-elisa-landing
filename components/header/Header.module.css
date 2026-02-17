@@ -1,0 +1,361 @@
+/* ===================================
+   HEADER — Villa Elisa
+   =================================== */
+
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.headerWrapper.scrolled {
+  background: var(--color-blanco-sillar);
+  box-shadow: 0 2px 24px rgba(74, 44, 23, 0.1);
+}
+
+.headerWrapper.atTop {
+  background: rgba(250, 246, 241, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ===================================
+   LOGO
+   =================================== */
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.logoImage {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logoText {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.logoAccent {
+  display: block;
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-top: 3px;
+}
+
+/* ===================================
+   NAV — Desktop
+   =================================== */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-tierra);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-dorado);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover {
+  color: var(--color-arcilla);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* ===================================
+   ACTIONS (WhatsApp + Lang)
+   =================================== */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+/* WhatsApp Button */
+.whatsappBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--color-arcilla);
+  color: var(--color-blanco-sillar);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1.5px solid transparent;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  line-height: 1;
+}
+
+.whatsappBtn:hover {
+  background: var(--color-tierra);
+  color: var(--color-dorado);
+  border-color: var(--color-dorado);
+}
+
+/* Lang Toggle */
+.langToggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.langBtn {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-sillar);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.langBtn:hover {
+  color: var(--color-arcilla);
+}
+
+.langActive {
+  color: var(--color-dorado) !important;
+  font-weight: 600;
+}
+
+.langSeparator {
+  color: var(--color-sillar);
+  font-size: 11px;
+  user-select: none;
+  opacity: 0.5;
+}
+
+/* ===================================
+   HAMBURGER — Mobile trigger
+   =================================== */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.hamburger:hover {
+  background: rgba(74, 44, 23, 0.06);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--color-tierra);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+}
+
+.hamburger.open .hamburgerLine:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburger.open .hamburgerLine:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.hamburger.open .hamburgerLine:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ===================================
+   MOBILE DRAWER
+   =================================== */
+
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 44, 23, 0.35);
+  z-index: 99;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.drawerOverlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--color-blanco-sillar);
+  z-index: 100;
+  padding: 100px 36px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -8px 0 32px rgba(74, 44, 23, 0.12);
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawerNavLink {
+  font-family: var(--font-label);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-tierra);
+  text-decoration: none;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(212, 184, 150, 0.3);
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.drawerNavLink:hover {
+  color: var(--color-arcilla);
+}
+
+.drawerActions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.drawerWhatsapp {
+  width: 100%;
+}
+
+.drawerWhatsapp .whatsappBtn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ===================================
+   LINEA DECORATIVA DORADA — bajo header en mobile
+   =================================== */
+
+.goldenLine {
+  position: absolute;
+  bottom: 0;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-dorado), transparent);
+  opacity: 0.4;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 0 24px;
+    height: 68px;
+  }
+
+  .logoText {
+    font-size: 22px;
+  }
+
+  .whatsappBtn {
+    padding: 9px 16px;
+    font-size: 12px;
+  }
+
+  .goldenLine {
+    left: 24px;
+    right: 24px;
+  }
+}
