@@ -1,16 +1,11 @@
 import Hero from '@/components/hero/Hero';
+import Rooms from '@/components/rooms/Rooms';
 
 export default function Home() {
   return (
     <main>
       <Hero />
-
-      {/* Próximas secciones — se irán construyendo en ramas separadas */}
-      <section
-        id="habitaciones"
-        style={{ minHeight: '100vh', background: 'var(--color-blanco-sillar)' }}
-        aria-label="Habitaciones"
-      />
+      <Rooms />
       <section
         id="adn"
         style={{ minHeight: '100vh', background: 'var(--color-crema)' }}
