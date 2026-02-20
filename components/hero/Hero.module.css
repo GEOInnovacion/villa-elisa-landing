@@ -1,0 +1,365 @@
+/* ===================================
+   HERO — Villa Elisa
+   "Ventana que Respira"
+   Scroll-driven: el rectángulo de video
+   crece hasta llenar el hero completo.
+   =================================== */
+
+/* ── Sección contenedora ─────────────── */
+.hero {
+  position: relative;
+  /*
+    Altura del contenedor scrollable del hero.
+    scroll range = height - 100vh.
+    Con 400vh → scroll range = 300vh.
+    El hook usa window.scrollTo sobre este rango para mover t (0–1).
+    Aumentar para hacer la animación más "pesada" / lenta.
+  */
+  height: 100vh;
+  background: var(--color-tierra);
+}
+
+/* ── Parte sticky: lo que se ve fijo mientras scrolleas ─── */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Fondo oscuro detrás del rectángulo ─ */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--color-tierra);
+  z-index: 0;
+}
+
+/* ───────────────────────────────────────
+   RECTÁNGULO DE VIDEO
+   Empieza pequeño (portrait), crece a full
+   ─────────────────────────────────────── */
+.videoRect {
+  position: absolute;
+  /* Posición y tamaño se controlan desde JS via CSS vars */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--rect-w, 260px);
+  height: var(--rect-h, 400px);
+  overflow: hidden;
+  border-radius: var(--rect-radius, 3px);
+  z-index: 1;
+  /* Transición suavizadora para el tracking del scroll */
+  will-change: width, height, border-radius;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Fallback gradiente animado */
+.videoFallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    #4A2C17 0%,
+    #8B5E3C 40%,
+    #C9A96E 70%,
+    #D4B896 100%
+  );
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+.videoFallback::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 35% 45%,
+    rgba(250, 246, 241, 0.10) 0%,
+    transparent 65%
+  );
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1.00) translate(0px, 0px); }
+  33%  { transform: scale(1.07) translate(-8px, 4px); }
+  66%  { transform: scale(1.04) translate(6px, -4px); }
+  100% { transform: scale(1.09) translate(-4px, 6px); }
+}
+
+/* ── Overlay del rectángulo (dentro) ─── */
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 44, 23, 0.05) 0%,
+    rgba(74, 44, 23, 0.55) 100%
+  );
+  opacity: var(--overlay-opacity, 0);
+  transition: opacity 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── Borde dorado del rectángulo ─────── */
+.videoRect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(201, 169, 110, var(--rect-border-opacity, 0.5));
+  border-radius: inherit;
+  z-index: 3;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+/* ───────────────────────────────────────
+   PALABRAS DEL TÍTULO — encima del video
+   ─────────────────────────────────────── */
+.wordsLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  pointer-events: none;
+}
+
+.word {
+  font-family: var(--font-title);
+  font-size: clamp(48px, 8vw, 90px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-blanco-sillar);
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  text-align: center;
+
+  /* Empieza invisible, aparece con scroll */
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.word.wordVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Eyebrow dentro del video (aparece al final) ── */
+.videoEyebrow {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+
+  opacity: var(--eyebrow-opacity, 0);
+  transform: translateY(calc((1 - var(--eyebrow-opacity, 0)) * 8px));
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.eyebrowLine {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-dorado);
+  opacity: 0.6;
+}
+
+/* ───────────────────────────────────────
+   CTA — SIEMPRE VISIBLE, FUERA DEL RECT
+   ─────────────────────────────────────── */
+.ctaZone {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  /* Aparece al montar la página, independiente del scroll */
+  opacity: 0;
+  animation: ctaFadeIn 0.8s ease 0.4s forwards;
+}
+
+@keyframes ctaFadeIn {
+  to { opacity: 1; }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 44px;
+  background: var(--color-arcilla);
+  color: var(--color-blanco-sillar);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-arcilla);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+/* Shimmer */
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 169, 110, 0.28) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.cta:hover::before { left: 100%; }
+.cta:hover {
+  background: transparent;
+  border-color: var(--color-dorado);
+  color: var(--color-dorado);
+}
+
+.ctaIcon {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.cta:hover .ctaIcon { transform: translateX(4px); }
+
+/* ── Hint de scroll — sobre el CTA ────── */
+.scrollHint {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(250, 246, 241, 0.38);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  /* Desaparece cuando el scroll avanza */
+  opacity: var(--scroll-hint-opacity, 1);
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.scrollHintChevron {
+  animation: bounceDown 2.2s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+/* ───────────────────────────────────────
+   ACENTO DORADO
+   ─────────────────────────────────────── */
+.goldenAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(to right, var(--color-dorado), transparent);
+  z-index: 10;
+  opacity: 0.6;
+}
+
+.goldenAccent::before {
+  content: '';
+  position: absolute;
+  top: -56px;
+  left: 0;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, var(--color-dorado));
+  opacity: 0.45;
+}
+
+/* ───────────────────────────────────────
+   ESTADO FINAL — cuando el rect es full
+   (clase añadida por JS)
+   ─────────────────────────────────────── */
+.heroExpanded .ctaZone {
+  /* En estado expandido el CTA sigue abajo, ya visible */
+}
+
+/* ───────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .word {
+    font-size: clamp(38px, 11vw, 64px);
+  }
+
+  .cta {
+    padding: 14px 32px;
+    font-size: 10px;
+  }
+
+  .ctaZone {
+    bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .eyebrowLine {
+    display: none;
+  }
+
+  .word {
+    font-size: clamp(34px, 12vw, 52px);
+  }
+}

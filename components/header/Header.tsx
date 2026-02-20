@@ -23,7 +23,7 @@ function Logo() {
           src="/logo.png"
           alt="Villa Elisa Hotel Boutique"
           className={styles.logoImage}
-          width={500}
+          width={160}
           height={48}
         />
       </a>
