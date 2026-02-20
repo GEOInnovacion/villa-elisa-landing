@@ -16,10 +16,9 @@
   box-shadow: 0 2px 24px rgba(74, 44, 23, 0.1);
 }
 
+/* Sobre el hero oscuro: completamente transparente */
 .headerWrapper.atTop {
-  background: rgba(250, 246, 241, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: transparent;
 }
 
 .header {
@@ -45,9 +44,11 @@
 }
 
 .logoImage {
-  height: 90px;
+  height: 52px;
   width: auto;
   object-fit: contain;
+  /* Logo tiene colores propios — se muestra tal cual sobre cualquier fondo */
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.18));
 }
 
 .logoText {
@@ -70,6 +71,59 @@
   text-transform: uppercase;
   color: var(--color-dorado);
   margin-top: 3px;
+}
+
+/* ===================================
+   MODO HERO — header sobre fondo oscuro
+   .headerWrapper.atTop hereda estos overrides
+   =================================== */
+
+.headerWrapper.atTop .navLink {
+  color: rgba(250, 246, 241, 0.82);
+}
+
+.headerWrapper.atTop .navLink:hover {
+  color: var(--color-dorado);
+}
+
+.headerWrapper.atTop .navLink::after {
+  background: var(--color-dorado);
+}
+
+.headerWrapper.atTop .whatsappBtn {
+  background: transparent;
+  border-color: rgba(250, 246, 241, 0.55);
+  color: var(--color-blanco-sillar);
+}
+
+.headerWrapper.atTop .whatsappBtn:hover {
+  background: var(--color-arcilla);
+  border-color: var(--color-arcilla);
+  color: var(--color-blanco-sillar);
+}
+
+.headerWrapper.atTop .langBtn {
+  color: rgba(250, 246, 241, 0.55);
+}
+
+.headerWrapper.atTop .langBtn:hover {
+  color: var(--color-blanco-sillar);
+}
+
+.headerWrapper.atTop .langActive {
+  color: var(--color-dorado) !important;
+}
+
+.headerWrapper.atTop .langSeparator {
+  color: rgba(250, 246, 241, 0.3);
+}
+
+.headerWrapper.atTop .hamburgerLine {
+  background: var(--color-blanco-sillar);
+}
+
+.headerWrapper.atTop .goldenLine {
+  opacity: 0.15;
 }
 
 /* ===================================
