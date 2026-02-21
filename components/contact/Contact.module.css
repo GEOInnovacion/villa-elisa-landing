@@ -1,0 +1,271 @@
+/* ===================================
+   CONTACT — Villa Elisa
+   Cierre de página — fondo tierra oscuro
+   =================================== */
+
+.contact {
+  background: var(--color-tierra);
+  padding: 100px 0 0;
+}
+
+/* ─────────────────────────────────────────────────
+   CONTENIDO SUPERIOR — info + CTA
+   ───────────────────────────────────────────────── */
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 64px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 80px;
+  align-items: start;
+}
+
+/* ── Columna izquierda ─────────────────────────── */
+.left { display: flex; flex-direction: column; }
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-dorado);
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(42px, 4.5vw, 68px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-blanco-sillar);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(250, 246, 241, 0.5);
+  margin-bottom: 40px;
+  max-width: 360px;
+}
+
+/* Botones CTA */
+.ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.btnWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: #25D366;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.btnWhatsapp:hover {
+  background: #1ebe5b;
+  transform: translateY(-1px);
+}
+
+.btnEmail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  border-radius: 4px;
+  color: var(--color-dorado);
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btnEmail:hover {
+  background: rgba(201, 169, 110, 0.1);
+  border-color: var(--color-dorado);
+}
+
+.btnIcon { flex-shrink: 0; }
+
+/* ── Columna derecha — datos de contacto ──────── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 8px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(250, 246, 241, 0.07);
+}
+
+.infoItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.infoLabel {
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  opacity: 0.75;
+}
+
+.infoValue {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: rgba(250, 246, 241, 0.82);
+  line-height: 1.6;
+  white-space: pre-line;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a.infoValue:hover { color: var(--color-blanco-sillar); }
+
+/* ─────────────────────────────────────────────────
+   MAPA — franja inferior
+   ───────────────────────────────────────────────── */
+.mapWrapper {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  filter: grayscale(30%) sepia(15%);
+  /* Tinte cálido coherente con la paleta */
+}
+
+.mapWrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────
+   FOOTER STRIP — tagline + copyright
+   ───────────────────────────────────────────────── */
+.footer {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 20px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 100%;
+}
+
+.footerTagline {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(250, 246, 241, 0.3);
+}
+
+.footerCopy {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(250, 246, 241, 0.2);
+}
+
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 900px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 52px;
+    padding: 0 40px 64px;
+  }
+
+  .subtitle { max-width: 100%; }
+  .mapWrapper { height: 240px; }
+  .footer { padding: 18px 40px; }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 640px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .contact { padding: 72px 0 0; }
+
+  .inner { padding: 0 24px 56px; gap: 40px; }
+
+  .title { font-size: clamp(36px, 10vw, 52px); }
+
+  .ctas { width: 100%; }
+
+  .btnWhatsapp,
+  .btnEmail {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mapWrapper { height: 200px; }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 18px 24px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner { padding: 0 20px 48px; }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .btnWhatsapp,
+  .btnEmail { transition: none; }
+}
