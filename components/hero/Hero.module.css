@@ -1,62 +1,43 @@
 /* ===================================
    HERO — Villa Elisa
-   "Ventana que Respira"
-   Scroll-driven: el rectángulo de video
-   crece hasta llenar el hero completo.
+   Video con padding en fondo oscuro.
+   Sin animaciones de scroll.
    =================================== */
 
-/* ── Sección contenedora ─────────────── */
+/* ── Sección raíz ────────────────────────────────── */
 .hero {
   position: relative;
-  /*
-    Altura del contenedor scrollable del hero.
-    scroll range = height - 100vh.
-    Con 400vh → scroll range = 300vh.
-    El hook usa window.scrollTo sobre este rango para mover t (0–1).
-    Aumentar para hacer la animación más "pesada" / lenta.
-  */
   height: 100vh;
+  min-height: 600px;
   background: var(--color-tierra);
-}
-
-/* ── Parte sticky: lo que se ve fijo mientras scrolleas ─── */
-.sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ── Fondo oscuro detrás del rectángulo ─ */
-.backdrop {
-  position: absolute;
-  inset: 0;
-  background: var(--color-tierra);
-  z-index: 0;
+/* ── Contenedor que da el padding al video ───────── */
+.videoFrame {
+  width: 100%;
+  height: 100%;
+  padding: 72px 44px 44px; /* top = altura del header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ───────────────────────────────────────
-   RECTÁNGULO DE VIDEO
-   Empieza pequeño (portrait), crece a full
-   ─────────────────────────────────────── */
-.videoRect {
-  position: absolute;
-  /* Posición y tamaño se controlan desde JS via CSS vars */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: var(--rect-w, 260px);
-  height: var(--rect-h, 400px);
+/* ── Wrapper del video: llena TODO el espacio del frame ── */
+.videoWrapper {
+  position: relative;
+  width: 100%;  /* sin max-width — se adapta a cualquier pantalla */
+  height: 100%;
+  border-radius: 12px;
   overflow: hidden;
-  border-radius: var(--rect-radius, 3px);
-  z-index: 1;
-  /* Transición suavizadora para el tracking del scroll */
-  will-change: width, height, border-radius;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(201, 169, 110, 0.08);
 }
 
+/* ── Video ───────────────────────────────────────── */
 .video {
   position: absolute;
   inset: 0;
@@ -64,6 +45,8 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  transform-origin: center center;
 }
 
 /* Fallback gradiente animado */
@@ -71,120 +54,59 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    160deg,
+    135deg,
     #4A2C17 0%,
-    #8B5E3C 40%,
-    #C9A96E 70%,
+    #8B5E3C 35%,
+    #C9A96E 65%,
     #D4B896 100%
   );
   animation: kenBurns 20s ease-in-out infinite alternate;
   transform-origin: center center;
 }
 
-.videoFallback::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at 35% 45%,
-    rgba(250, 246, 241, 0.10) 0%,
-    transparent 65%
-  );
-}
-
 @keyframes kenBurns {
   0%   { transform: scale(1.00) translate(0px, 0px); }
-  33%  { transform: scale(1.07) translate(-8px, 4px); }
-  66%  { transform: scale(1.04) translate(6px, -4px); }
-  100% { transform: scale(1.09) translate(-4px, 6px); }
+  50%  { transform: scale(1.06) translate(-6px, 3px); }
+  100% { transform: scale(1.03) translate(5px, -4px); }
 }
 
-/* ── Overlay del rectángulo (dentro) ─── */
+/* ── Overlay — degradado central para que el título se lea ── */
 .videoOverlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    rgba(74, 44, 23, 0.05) 0%,
-    rgba(74, 44, 23, 0.55) 100%
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(74, 44, 23, 0.55) 0%,
+    rgba(74, 44, 23, 0.18) 55%,
+    rgba(74, 44, 23, 0.08) 100%
   );
-  opacity: var(--overlay-opacity, 0);
-  transition: opacity 0.1s linear;
   pointer-events: none;
 }
 
-/* ── Borde dorado del rectángulo ─────── */
-.videoRect::after {
-  content: '';
+/* ── Contenido centrado sobre el video ───────────── */
+.videoContent {
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(201, 169, 110, var(--rect-border-opacity, 0.5));
-  border-radius: inherit;
-  z-index: 3;
-  pointer-events: none;
-  transition: border-color 0.2s ease;
-}
-
-/* ───────────────────────────────────────
-   PALABRAS DEL TÍTULO — encima del video
-   ─────────────────────────────────────── */
-.wordsLayer {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  text-align: center;
+  gap: 16px;
   pointer-events: none;
 }
 
-.word {
-  font-family: var(--font-title);
-  font-size: clamp(48px, 8vw, 90px);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--color-blanco-sillar);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  text-align: center;
-
-  /* Empieza invisible, aparece con scroll */
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
-}
-
-.word.wordVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Eyebrow dentro del video (aparece al final) ── */
-.videoEyebrow {
-  position: absolute;
-  bottom: 28px;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
+/* Eyebrow */
+.eyebrow {
   font-family: var(--font-label);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 500;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--color-dorado);
-
-  opacity: var(--eyebrow-opacity, 0);
-  transform: translateY(calc((1 - var(--eyebrow-opacity, 0)) * 8px));
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .eyebrowLine {
@@ -192,174 +114,178 @@
   width: 24px;
   height: 1px;
   background: var(--color-dorado);
-  opacity: 0.6;
+  opacity: 0.55;
+  flex-shrink: 0;
 }
 
-/* ───────────────────────────────────────
-   CTA — SIEMPRE VISIBLE, FUERA DEL RECT
-   ─────────────────────────────────────── */
-.ctaZone {
-  position: absolute;
-  bottom: 48px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+/* Título */
+.title {
   display: flex;
   flex-direction: column;
+  gap: 0;
   align-items: center;
-  gap: 10px;
-
-  /* Aparece al montar la página, independiente del scroll */
-  opacity: 0;
-  animation: ctaFadeIn 0.8s ease 0.4s forwards;
 }
 
-@keyframes ctaFadeIn {
-  to { opacity: 1; }
+.titleLine {
+  display: block;
+  font-family: var(--font-title);
+  font-size: clamp(52px, 7vw, 110px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-blanco-sillar);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 24px rgba(74, 44, 23, 0.5);
 }
 
-.cta {
+/* ── Barra "mejor tarifa" — flota entre hero y siguiente sección ── */
+.bestRate {
+  position: absolute;
+  bottom: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  background: var(--color-blanco-sillar);
+  border-radius: 10px;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.bestRateLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.bestRateStar {
+  color: var(--color-dorado);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bestRateLabel {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-tierra);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bestRateDivider {
+  width: 1px;
+  height: 36px;
+  background: rgba(74, 44, 23, 0.15);
+  flex-shrink: 0;
+}
+
+.bestRateNote {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(74, 44, 23, 0.6);
+  line-height: 1.4;
+}
+
+.bestRateCta {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  padding: 15px 44px;
+  gap: 8px;
+  padding: 11px 24px;
   background: var(--color-arcilla);
   color: var(--color-blanco-sillar);
   font-family: var(--font-label);
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 4px;
-  border: 1.5px solid var(--color-arcilla);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+  flex-shrink: 0;
+  transition: background 0.25s ease;
 }
 
-/* Shimmer */
-.cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(201, 169, 110, 0.28) 50%,
-    transparent 100%
-  );
-  transition: left 0.5s ease;
-}
-
-.cta:hover::before { left: 100%; }
-.cta:hover {
-  background: transparent;
-  border-color: var(--color-dorado);
-  color: var(--color-dorado);
-}
+.bestRateCta:hover { background: var(--color-tierra); }
 
 .ctaIcon {
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
   flex-shrink: 0;
 }
-.cta:hover .ctaIcon { transform: translateX(4px); }
+.bestRateCta:hover .ctaIcon { transform: translateX(3px); }
 
-/* ── Hint de scroll — sobre el CTA ────── */
-.scrollHint {
-  font-family: var(--font-label);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(250, 246, 241, 0.38);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 1024px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .videoFrame { padding: 72px 28px 36px; }
 
-  /* Desaparece cuando el scroll avanza */
-  opacity: var(--scroll-hint-opacity, 1);
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-  position: absolute;
-  bottom: calc(100% + 16px);
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  .bestRate {
+    width: calc(100% - 56px);
+    padding: 16px 22px;
+    gap: 14px;
+    bottom: -32px;
+  }
+
+  .bestRateNote { font-size: 11px; }
 }
 
-.scrollHintChevron {
-  animation: bounceDown 2.2s ease-in-out infinite;
-}
-
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(5px); }
-}
-
-/* ───────────────────────────────────────
-   ACENTO DORADO
-   ─────────────────────────────────────── */
-.goldenAccent {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 160px;
-  height: 2px;
-  background: linear-gradient(to right, var(--color-dorado), transparent);
-  z-index: 10;
-  opacity: 0.6;
-}
-
-.goldenAccent::before {
-  content: '';
-  position: absolute;
-  top: -56px;
-  left: 0;
-  width: 1px;
-  height: 56px;
-  background: linear-gradient(to bottom, transparent, var(--color-dorado));
-  opacity: 0.45;
-}
-
-/* ───────────────────────────────────────
-   ESTADO FINAL — cuando el rect es full
-   (clase añadida por JS)
-   ─────────────────────────────────────── */
-.heroExpanded .ctaZone {
-  /* En estado expandido el CTA sigue abajo, ya visible */
-}
-
-/* ───────────────────────────────────────
-   RESPONSIVE
-   ─────────────────────────────────────── */
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 768px)
+   ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .word {
-    font-size: clamp(38px, 11vw, 64px);
+  .hero { height: 100svh; min-height: 560px; }
+
+  .videoFrame { padding: 68px 14px 28px; }
+
+  .videoWrapper { border-radius: 14px; }
+
+  .videoContent { bottom: 76px; gap: 12px; }
+
+  .titleLine { font-size: clamp(40px, 11vw, 72px); }
+
+  .bestRate {
+    width: calc(100% - 28px);
+    padding: 14px 18px;
+    gap: 12px;
+    bottom: -28px;
   }
 
-  .cta {
-    padding: 14px 32px;
-    font-size: 10px;
-  }
+  .bestRateDivider { display: none; }
+  .bestRateNote    { font-size: 11px; }
 
-  .ctaZone {
-    bottom: 36px;
+  .bestRateCta {
+    margin-left: auto;
+    padding: 10px 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .eyebrowLine {
-    display: none;
-  }
+  .videoFrame { padding: 64px 10px 22px; }
+  .videoContent { bottom: 68px; }
+  .titleLine { font-size: clamp(36px, 12vw, 60px); }
 
-  .word {
-    font-size: clamp(34px, 12vw, 52px);
-  }
+  .bestRate { padding: 12px 16px; }
+  .bestRateLabel { font-size: 9px; letter-spacing: 1.5px; }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .videoFallback { animation: none; }
+  .cta           { transition: none; }
+  .cta::before   { display: none; }
 }

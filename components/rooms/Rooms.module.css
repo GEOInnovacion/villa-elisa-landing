@@ -405,18 +405,16 @@
   .rightPane { overflow: visible; }
 
   .track {
-    /* scroll-snap center: cada card se centra sola */
     padding: 0 7.5vw 32px;
     gap: 15vw;
     height: auto;
-    scroll-snap-type: x mandatory;
   }
 
   .card {
     width: 85vw;
     height: 72svh;
     min-height: 460px;
-    border-radius: 12px;
+    border-radius: 8px;
     scroll-snap-align: center;
   }
 
@@ -429,8 +427,6 @@
 
 @media (max-width: 480px) {
   .leftPanel { padding: 56px 20px 24px; }
-  .track { padding: 0 5vw 32px; gap: 10vw; }
-  .card { width: 90vw; height: 68svh; }
   .arrows { margin-bottom: 8px; }
 }
 

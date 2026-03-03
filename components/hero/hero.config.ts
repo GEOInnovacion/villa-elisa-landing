@@ -11,6 +11,11 @@ export const HERO_VIDEO_WEBM_SRC = '';   // ej: '/videos/villa-elisa-hero.webm' 
 export const HERO_VIDEO_POSTER = '';     // ej: '/images/hero-poster.jpg'
 
 // ─────────────────────────────────────────────
+// CTA — Cloudbeds (barra "mejor tarifa")
+// ─────────────────────────────────────────────
+export const CLOUDBEDS_RESERVATION_HREF = 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd';
+
+// ─────────────────────────────────────────────
 // CTA — WhatsApp (mismo número que el header)
 // ─────────────────────────────────────────────
 const WA_NUMBER = '51999999999'; // ← reemplazar con el número real
@@ -29,26 +34,31 @@ export function getHeroWhatsappHref(lang: Lang): string {
 export type HeroContent = {
   eyebrow: string;
   titleLines: string[];
-  subtitle: string;
   cta: string;
   scrollLabel: string;
+  // Barra flotante "mejor tarifa"
+  bestRateLabel: string;
+  bestRateCta: string;
+  bestRateNote: string;
 };
 
 export const HERO_CONTENT: Record<Lang, HeroContent> = {
   es: {
     eyebrow: 'Arequipa, Perú',
     titleLines: ['Arte.', 'Naturaleza.', 'Silencio.'],
-    subtitle:
-      'Un refugio boutique donde el sillar cobra vida entre jardines, arte y descanso absoluto.',
     cta: 'Reservar ahora',
     scrollLabel: 'Descubrir',
+    bestRateLabel: 'Mejor tarifa garantizada',
+    bestRateCta: 'Reservar ahora',
+    bestRateNote: 'Aprovecha descuentos para más noches y reservas de última hora',
   },
   en: {
     eyebrow: 'Arequipa, Peru',
     titleLines: ['Art.', 'Nature.', 'Silence.'],
-    subtitle:
-      'A boutique retreat where volcanic stone meets lush gardens, art, and absolute rest.',
     cta: 'Book Now',
     scrollLabel: 'Discover',
+    bestRateLabel: 'Best rate guaranteed',
+    bestRateCta: 'Book now',
+    bestRateNote: 'Enjoy discounts for longer stays and last-minute bookings',
   },
 };

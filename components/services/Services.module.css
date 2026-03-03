@@ -120,10 +120,10 @@
   min-height: 496px; /* 2 × 240 + 1 × gap */
 }
 
-/* La de fila completa (tours moto): horizontal, más alta */
+/* La de fila completa (tours moto): horizontal */
 .card:nth-child(6) {
-  aspect-ratio: 21 / 8;
-  min-height: 240px;
+  aspect-ratio: 21 / 6;
+  min-height: 180px;
 }
 
 .card:hover {
@@ -321,7 +321,7 @@
   }
 
   .card:nth-child(3) { min-height: 220px; }
-  .card:nth-child(6) { aspect-ratio: 4 / 3; min-height: 260px; }
+  .card:nth-child(6) { aspect-ratio: 4 / 3; }
 
   /* En mobile: descripción y acciones siempre visibles */
   .cardDescription {
