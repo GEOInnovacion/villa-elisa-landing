@@ -1,9 +1,19 @@
 'use client';
 
 import Image from 'next/image';
+import * as LucideIcons from 'lucide-react';
 import type { RoomData } from './rooms.config';
+import { buildRoomWhatsappHref } from './rooms.config';
 import type { Lang } from '@/components/header/nav.config';
 import styles from './Rooms.module.css';
+
+// ─── Ícono de amenidad (Lucide dinámico) ──────────────────────────────────────
+
+function AmenityIcon({ name }: { name: string }) {
+  const Icon = (LucideIcons as Record<string, React.ElementType>)[name];
+  if (!Icon) return null;
+  return <Icon size={12} strokeWidth={1.75} aria-hidden="true" />;
+}
 
 // ─── Ícono flecha ─────────────────────────────────────────────────────────────
 
@@ -34,6 +44,7 @@ type RoomCardProps = {
 
 export default function RoomCard({ room, lang, index, ctaLabel }: RoomCardProps) {
   const num = String(index + 1).padStart(2, '0');
+  const waHref = buildRoomWhatsappHref(room.name[lang], lang);
 
   return (
     <article
@@ -76,13 +87,16 @@ export default function RoomCard({ room, lang, index, ctaLabel }: RoomCardProps)
           <ul className={styles.cardAmenities} aria-label={lang === 'es' ? 'Amenidades' : 'Amenities'}>
             {room.amenities.map((a, i) => (
               <li key={i} className={styles.cardAmenity}>
+                <span className={styles.cardAmenityIcon}>
+                  <AmenityIcon name={a.icon} />
+                </span>
                 {lang === 'es' ? a.es : a.en}
               </li>
             ))}
           </ul>
 
           <a
-            href={room.cloudbedsHref}
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cardCta}
