@@ -1,0 +1,360 @@
+/* ===================================
+   SERVICES — Villa Elisa
+   "Más que un hotel"
+   Fondo oscuro tierra, grid masonry-like
+   =================================== */
+
+.services {
+  background: var(--color-tierra);
+  padding: 120px 0 100px;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────
+   CABECERA
+   ───────────────────────────────────────────────── */
+.header {
+  max-width: 1200px;
+  margin: 0 auto 72px;
+  padding: 0 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.headerLeft { display: flex; flex-direction: column; }
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-dorado);
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(48px, 5.5vw, 80px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-blanco-sillar);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(250, 246, 241, 0.5);
+  max-width: 320px;
+  text-align: right;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────
+   GRID DE TARJETAS — 3 cols, 2 filas
+   Col 1: 2 cards pequeñas apiladas
+   Col 2: 1 card grande (2 filas)
+   Col 3: 2 cards pequeñas apiladas
+   ───────────────────────────────────────────────── */
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+
+/* La card central (índice 2 = reuniones) ocupa 2 filas */
+.card:nth-child(3) {
+  grid-row: 1 / 3;
+  grid-column: 2;
+}
+
+/* Reordenar para que la card grande quede en col 2 */
+.card:nth-child(1) { grid-column: 1; grid-row: 1; }
+.card:nth-child(2) { grid-column: 1; grid-row: 2; }
+.card:nth-child(3) { grid-column: 2; grid-row: 1 / 3; }
+.card:nth-child(4) { grid-column: 3; grid-row: 1; }
+.card:nth-child(5) { grid-column: 3; grid-row: 2; }
+/* Card 6 — fila extra debajo */
+.card:nth-child(6) { grid-column: 1 / 4; grid-row: 3; }
+
+/* ─────────────────────────────────────────────────
+   CARD individual
+   ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 240px;
+  /* Aspect ratio por defecto para cards pequeñas */
+  aspect-ratio: 4 / 3;
+  transition: box-shadow 0.5s ease;
+}
+
+/* La grande: proporción vertical */
+.card:nth-child(3) {
+  aspect-ratio: auto;
+  min-height: 496px; /* 2 × 240 + 1 × gap */
+}
+
+/* La de fila completa (tours moto): horizontal */
+.card:nth-child(6) {
+  aspect-ratio: 21 / 6;
+  min-height: 180px;
+}
+
+.card:hover {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+/* Imagen */
+.cardImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cardImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardImage { transform: scale(1.06); }
+
+/* Gradiente */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(10, 4, 1, 0.93) 0%,
+    rgba(10, 4, 1, 0.5)  45%,
+    rgba(10, 4, 1, 0.12) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ─── Contenido de la card ───────────────────────── */
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Tag eyebrow */
+.cardTag {
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+}
+
+/* Título */
+.cardTitle {
+  font-family: var(--font-subtitle);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--color-blanco-sillar);
+  line-height: 1.15;
+}
+
+/* Card grande: título más grande */
+.card:nth-child(3) .cardTitle { font-size: 22px; }
+.card:nth-child(6) .cardTitle { font-size: 20px; }
+
+/* Descripción — se revela al hover */
+.cardDescription {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: rgba(250, 246, 241, 0.68);
+  line-height: 1.6;
+  max-width: 380px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+  margin-top: 2px;
+}
+
+.card:hover .cardDescription {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CTAs — siempre debajo de la descripción */
+.cardActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease 0.12s, transform 0.35s ease 0.12s;
+  margin-top: 4px;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Botón WhatsApp — relleno verde */
+.btnWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  background: #25D366;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease;
+}
+
+.btnWhatsapp:hover { background: #1ebe5b; }
+
+/* Botón Descargar — outline dorado */
+.btnDownload {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 110, 0.5);
+  border-radius: 3px;
+  color: var(--color-dorado);
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btnDownload:hover {
+  background: var(--color-dorado);
+  border-color: var(--color-dorado);
+  color: var(--color-tierra);
+}
+
+.btnIcon { flex-shrink: 0; }
+
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 1024px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .header { padding: 0 40px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .subtitle { text-align: left; max-width: 100%; }
+  .grid { padding: 0 40px; }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 768px) — columna única
+   ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .services { padding: 80px 0 72px; }
+
+  .header { padding: 0 24px; margin-bottom: 48px; }
+  .title { font-size: clamp(40px, 11vw, 60px); }
+
+  /* Columna única */
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 0 24px;
+    gap: 12px;
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(2),
+  .card:nth-child(3),
+  .card:nth-child(4),
+  .card:nth-child(5),
+  .card:nth-child(6) {
+    grid-column: 1;
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+    min-height: 220px;
+  }
+
+  .card:nth-child(3) { min-height: 220px; }
+  .card:nth-child(6) { aspect-ratio: 4 / 3; }
+
+  /* En mobile: descripción y acciones siempre visibles */
+  .cardDescription {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    font-size: 11px;
+  }
+
+  .cardActions {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .card:nth-child(3) .cardTitle { font-size: 17px; }
+  .card:nth-child(6) .cardTitle { font-size: 17px; }
+}
+
+@media (max-width: 480px) {
+  .header { padding: 0 20px; }
+  .grid { padding: 0 20px; }
+
+  .btnWhatsapp,
+  .btnDownload {
+    font-size: 7.5px;
+    padding: 8px 14px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cardImage { transition: none; }
+  .cardDescription { opacity: 1; transform: none; transition: none; }
+  .cardActions { opacity: 1; transform: none; transition: none; }
+}

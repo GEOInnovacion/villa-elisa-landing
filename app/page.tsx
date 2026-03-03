@@ -1,21 +1,19 @@
 import Hero from '@/components/hero/Hero';
+import Rooms from '@/components/rooms/Rooms';
+import Dna from '@/components/dna/Dna';
+import Services from '@/components/services/Services';
+import Reviews from '@/components/reviews/Reviews';
+import Contact from '@/components/contact/Contact';
 
 export default function Home() {
   return (
     <main>
       <Hero />
-
-      {/* Próximas secciones — se irán construyendo en ramas separadas */}
-      <section
-        id="habitaciones"
-        style={{ minHeight: '100vh', background: 'var(--color-blanco-sillar)' }}
-        aria-label="Habitaciones"
-      />
-      <section
-        id="adn"
-        style={{ minHeight: '100vh', background: 'var(--color-crema)' }}
-        aria-label="Nuestro ADN"
-      />
+      <Rooms />
+      <Dna />
+      <Services />
+      <Reviews />
+      <Contact />
     </main>
   );
 }
