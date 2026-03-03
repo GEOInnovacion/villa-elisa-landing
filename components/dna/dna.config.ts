@@ -6,15 +6,8 @@ import type { Lang } from '@/components/header/nav.config';
 
 export type DnaPhoto = {
   id: string;
-  photo: string;         // '/images/dna/{id}.jpg'
+  photo: string;
   alt: Record<Lang, string>;
-};
-
-export type DnaReason = {
-  id: string;
-  icon: string;          // SVG path string
-  title: Record<Lang, string>;
-  body: Record<Lang, string>;
 };
 
 // ─────────────────────────────────────────────
@@ -49,67 +42,43 @@ export const DNA_PHOTOS: DnaPhoto[] = [
 ];
 
 // ─────────────────────────────────────────────
-// Razones — por qué Villa Elisa es diferente
-// ─────────────────────────────────────────────
-
-export const DNA_REASONS: DnaReason[] = [
-  {
-    id: 'arte',
-    // Ícono: cuadro / pincel
-    icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z',
-    title: { es: 'Arte vivo', en: 'Living art' },
-    body: {
-      es: 'Cada rincón es una galería. Piezas de artistas arequipeños conviven con la arquitectura colonial de sillar blanco, convirtiendo el hotel en un museo habitable.',
-      en: 'Every corner is a gallery. Works by Arequipeño artists coexist with colonial white volcanic stone architecture, turning the hotel into a liveable museum.',
-    },
-  },
-  {
-    id: 'historia',
-    // Ícono: edificio / columna
-    icon: 'M3 21h18M3 7l9-4 9 4M4 7v14m16-14v14M8 21V11m4 10V11m4 10V11M8 7h.01M12 7h.01M16 7h.01',
-    title: { es: 'Historia en cada piedra', en: 'History in every stone' },
-    body: {
-      es: 'Casona colonial del siglo XIX restaurada con rigor. El sillar de los volcanes Chachani y Misti sigue siendo el protagonista, ahora con el confort de un boutique de lujo.',
-      en: '19th-century colonial mansion meticulously restored. Volcanic stone from Chachani and Misti remains the protagonist, now paired with luxury boutique comfort.',
-    },
-  },
-  {
-    id: 'silencio',
-    // Ícono: hoja / naturaleza
-    icon: 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z',
-    title: { es: 'Silencio de autor', en: 'Curated silence' },
-    body: {
-      es: 'Sin eventos masivos ni grupos turísticos. Villa Elisa es un espacio de 5 habitaciones pensado para quienes valoran la intimidad, el detalle y la calma como lujo supremo.',
-      en: 'No mass events or tour groups. Villa Elisa is a 5-room space designed for those who value intimacy, detail and calm as the ultimate luxury.',
-    },
-  },
-];
-
-// ─────────────────────────────────────────────
 // Contenido bilingüe de la sección
 // ─────────────────────────────────────────────
 
 export type DnaSectionContent = {
   eyebrow: string;
   title: string;
-  subtitle: string;
-  pullquote: string;
-  pullquoteAuthor: string;
+  epigraphAttribution: string;
+  epigraph: string;
+  paragraphs: string[];
+  closing: string;
 };
 
 export const DNA_SECTION: Record<Lang, DnaSectionContent> = {
   es: {
-    eyebrow: 'Nuestro ADN',
-    title: '¿Por qué\nVilla Elisa?',
-    subtitle: 'No somos solo un lugar para dormir. Somos una experiencia diseñada para quienes viajan diferente.',
-    pullquote: 'El lujo verdadero no grita. Susurra en sillar blanco.',
-    pullquoteAuthor: 'Villa Elisa Hotel Boutique · Arequipa',
+    eyebrow: 'ADN',
+    title: 'De historia\na una novela.',
+    epigraphAttribution: 'Claude Adrien Helvétius, filósofo francés (1715–1771)',
+    epigraph: '"La historia es la novela de los hechos, y la novela es la historia de los sentimientos."',
+    paragraphs: [
+      'La casona, construida en 1947 por la familia Heineberg, emigrantes de Alemania, lanza esta novela. El Sr. Wilfort, austriaco, llegó a Arequipa en 1939 cuando Europa escribía otra historia. Compraron la casa en 1957 y ya era un punto de parada conocido de los viajeros extranjeros. En 1977, volvieron a Austria.',
+      'Luego, el Sr. Castro, arequipeño, con su esposa alemana Sra. Blumel, empezaron a escribir un nuevo capítulo, conservando la tradición de hospitalidad de este lugar, conocido como Baden-Baden.',
+      'En 1978, Jean-Louis llegó a Arequipa sin saber que un día iba a escribir otro capítulo. Después de 2 años en la Universidad San Agustín, se enamoró de Arequipa y de su Chuquibambina Rosa Elisa. Se fueron por varios continentes durante 35 años. En 2007, pensando en un futuro menos nómade, compraron esa casona.',
+      'Después de 2 años de construcción del edificio nuevo y de decoración, VILLA ELISA nació en septiembre 2011. Ana-María, hermana de Rosa Elisa, se juntó al proyecto, con un corazón grande como el Misti.',
+    ],
+    closing: 'Así comienza la novela de Villa Elisa, un lugar donde los sentimientos están siempre presentes con los huéspedes. Muchas gracias a todos ustedes por los nuevos capítulos a escribir en esta novela.',
   },
   en: {
-    eyebrow: 'Our DNA',
-    title: 'Why\nVilla Elisa?',
-    subtitle: 'We are not just a place to sleep. We are an experience designed for those who travel differently.',
-    pullquote: 'True luxury does not shout. It whispers in white stone.',
-    pullquoteAuthor: 'Villa Elisa Hotel Boutique · Arequipa',
+    eyebrow: 'DNA',
+    title: 'From history\nto a novel.',
+    epigraphAttribution: 'Claude Adrien Helvétius, French philosopher (1715–1771)',
+    epigraph: '"History is the novel of facts, and the novel is the history of feelings."',
+    paragraphs: [
+      'The house, built in 1947 by the Heineberg family, German emigrants, opens this novel. Mr. Wilfort, an Austrian, arrived in Arequipa in 1939 when Europe was writing another story. They bought the house in 1957 and it was already a well-known stopover for foreign travelers. In 1977, they returned to Austria.',
+      'Then, Mr. Castro, from Arequipa, and his German wife Mrs. Blumel, began writing a new chapter, preserving the hospitality tradition of this place, known as Baden-Baden.',
+      'In 1978, Jean-Louis arrived in Arequipa not knowing that one day he would write another chapter. After 2 years at the Universidad San Agustín, he fell in love with Arequipa and with his Chuquibambina Rosa Elisa. They traveled across several continents for 35 years. In 2007, thinking of a less nomadic future, they bought this house.',
+      'After 2 years of construction of the new building and decoration, VILLA ELISA was born in September 2011. Ana-María, Rosa Elisa\'s sister, joined the project, with a heart as big as the Misti.',
+    ],
+    closing: 'So begins the novel of Villa Elisa, a place where feelings are always present with the guests. Thank you all for the new chapters to be written in this novel.',
   },
 };

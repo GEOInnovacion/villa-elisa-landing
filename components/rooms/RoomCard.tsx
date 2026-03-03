@@ -10,7 +10,7 @@ import styles from './Rooms.module.css';
 // ─── Ícono de amenidad (Lucide dinámico) ──────────────────────────────────────
 
 function AmenityIcon({ name }: { name: string }) {
-  const Icon = (LucideIcons as Record<string, React.ElementType>)[name];
+  const Icon = (LucideIcons as unknown as Record<string, React.ElementType>)[name];
   if (!Icon) return null;
   return <Icon size={12} strokeWidth={1.75} aria-hidden="true" />;
 }
