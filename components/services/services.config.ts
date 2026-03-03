@@ -14,6 +14,7 @@ export type Service = {
   description: Record<Lang, string>;
   whatsappMessage: Record<Lang, string>;
   pdfHref: string;        // ← reemplazar con URL real del PDF de precios
+  accent: string;         // color CSS del acento visual de la carta
 };
 
 // ─── Helpers para construir el link de WhatsApp ───────────────────────────────
@@ -44,6 +45,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera hacer una reserva en el Restaurante Museo de Villa Elisa',
       en: 'Hello, I would like to make a reservation at Villa Elisa Museum Restaurant',
     },
+    accent: '#C9A96E', // dorado — gastronomía premium
     pdfHref: '/docs/precios-restaurante.pdf', // ← reemplazar
   },
   {
@@ -63,6 +65,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera información sobre la piscina privada de Villa Elisa',
       en: 'Hello, I would like information about the Villa Elisa private pool',
     },
+    accent: '#7BA7B5', // azul agua — bienestar
     pdfHref: '/docs/precios-piscina.pdf', // ← reemplazar
   },
   {
@@ -82,6 +85,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera cotizar el espacio de reuniones de Villa Elisa',
       en: 'Hello, I would like a quote for the Villa Elisa meeting room',
     },
+    accent: '#A8956A', // ocre — corporativo cálido
     pdfHref: '/docs/precios-reuniones.pdf', // ← reemplazar
   },
   {
@@ -101,6 +105,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera información sobre el paquete de noche de bodas en Villa Elisa',
       en: 'Hello, I would like information about the Villa Elisa wedding night package',
     },
+    accent: '#D4A5B5', // rosa empolvado — celebraciones
     pdfHref: '/docs/precios-bodas.pdf', // ← reemplazar
   },
   {
@@ -120,6 +125,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera cotizar una sesión de fotos en Villa Elisa',
       en: 'Hello, I would like a quote for a photo session at Villa Elisa',
     },
+    accent: '#B8A080', // arena — fotografía artística
     pdfHref: '/docs/precios-sesion-fotos.pdf', // ← reemplazar
   },
   {
@@ -139,6 +145,7 @@ export const SERVICES: Service[] = [
       es: 'Hola, quisiera información sobre los tours en moto desde Villa Elisa',
       en: 'Hello, I would like information about motorcycle tours from Villa Elisa',
     },
+    accent: '#8FA882', // verde montaña — aventura
     pdfHref: '/docs/precios-tours-moto.pdf', // ← reemplazar
   },
 ];

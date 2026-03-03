@@ -48,12 +48,22 @@ export default function Services() {
         <p className={styles.subtitle}>{content.subtitle}</p>
       </div>
 
-      {/* Grid de servicios */}
+      {/* Bento grid */}
       <div className={styles.grid}>
-        {SERVICES.map((service) => {
+        {SERVICES.map((service, index) => {
           const waUrl = buildWhatsappUrl(service.whatsappMessage[lang]);
           return (
-            <article key={service.id} className={styles.card}>
+            <article
+              key={service.id}
+              className={styles.card}
+              style={{ '--accent': service.accent } as React.CSSProperties}
+            >
+
+              {/* Número decorativo */}
+              <span className={styles.cardNumber} aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+
               {/* Foto */}
               <div className={styles.cardImageWrapper}>
                 <Image
@@ -66,7 +76,7 @@ export default function Services() {
                 />
               </div>
 
-              {/* Gradiente */}
+              {/* Overlay */}
               <div className={styles.cardOverlay} aria-hidden="true" />
 
               {/* Contenido */}
@@ -97,6 +107,7 @@ export default function Services() {
                   </a>
                 </div>
               </div>
+
             </article>
           );
         })}
