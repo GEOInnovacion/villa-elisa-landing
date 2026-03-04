@@ -46,9 +46,9 @@ export const HOTEL_INFO = {
     "https://www.expedia.com/Arequipa-Hotels-Hotel-Boutique-Villa-Elisa.h10517032.Hotel-Information",
   ],
   images: [
-    "/og-image.jpg",
-    "/images/rooms/vip.jpg",
-    "/images/services/restaurante.jpg",
+    "/og-image.webp",
+    "/images/rooms/vip.webp",
+    "/images/services/restaurante.webp",
   ],
 } as const;
 

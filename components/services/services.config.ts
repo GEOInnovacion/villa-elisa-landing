@@ -30,7 +30,7 @@ export function buildWhatsappUrl(message: string): string {
 export const SERVICES: Service[] = [
   {
     id: 'restaurante',
-    photo: '/images/services/restaurante.jpg',
+    photo: '/images/services/restaurante.webp',
     alt: {
       es: 'Restaurante museo de Villa Elisa',
       en: 'Villa Elisa museum restaurant',
@@ -50,7 +50,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'piscina',
-    photo: '/images/services/piscina.jpg',
+    photo: '/images/services/piscina.webp',
     alt: {
       es: 'Piscina privada de Villa Elisa',
       en: 'Villa Elisa private pool',
@@ -70,7 +70,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'reuniones',
-    photo: '/images/services/reuniones.jpg',
+    photo: '/images/services/reuniones.webp',
     alt: {
       es: 'Sala de reuniones y eventos corporativos',
       en: 'Meeting room and corporate events',
@@ -90,7 +90,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'bodas',
-    photo: '/images/services/bodas.jpg',
+    photo: '/images/services/bodas.webp',
     alt: {
       es: 'Noche de bodas y celebraciones románticas',
       en: 'Wedding night and romantic celebrations',
@@ -110,7 +110,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'sesion-fotos',
-    photo: '/images/services/sesion-fotos.jpg',
+    photo: '/images/services/sesion-fotos.webp',
     alt: {
       es: 'Sesión de fotos profesional en Villa Elisa',
       en: 'Professional photo session at Villa Elisa',
@@ -130,7 +130,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'tours-moto',
-    photo: '/images/services/tours-moto.jpg',
+    photo: '/images/services/tours-moto.webp',
     alt: {
       es: 'Tours en moto por Arequipa',
       en: 'Motorcycle tours around Arequipa',

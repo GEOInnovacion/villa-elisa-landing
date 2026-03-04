@@ -46,26 +46,6 @@ export const PLATFORMS: Platform[] = [
     href: 'https://www.expedia.com/Arequipa-Hotels-Hotel-Boutique-Villa-Elisa.h10517032.Hotel-Information',
     logo: 'expedia',
   },
-  {
-    id: 'hotels',
-    name: 'Hotels.com',
-    score: '9.8',
-    scoreLabel: { es: 'Excepcional', en: 'Exceptional' },
-    maxScore: '/10',
-    reviewCount: { es: '133 opiniones', en: '133 reviews' },
-    href: 'https://www.hotels.com/ho509948/hotel-boutique-villa-elisa-arequipa-peru/',
-    logo: 'hotels',
-  },
-  {
-    id: 'kayak',
-    name: 'Kayak',
-    score: '9.3',
-    scoreLabel: { es: 'Excelente', en: 'Excellent' },
-    maxScore: '/10',
-    reviewCount: { es: '247 opiniones', en: '247 reviews' },
-    href: 'https://www.es.kayak.com/Arequipa-Hoteles-Villa-Elisa-Boutique.653171.ksp',
-    logo: 'kayak',
-  },
 ];
 
 // ─────────────────────────────────────────────
@@ -113,61 +93,6 @@ export const REVIEWS: Review[] = [
     text: {
       es: 'Habitación muy limpia, personal amable. Como alojarse en una hermosa villa colonial con exuberantes jardines y hermosas antigüedades.',
       en: 'Very clean room, friendly staff. Like staying in a beautiful colonial villa with lush gardens and beautiful antiques.',
-    },
-  },
-  {
-    id: 'r4',
-    author: 'D33P4K',
-    country: { es: 'Internacional', en: 'International' },
-    platform: 'tripadvisor',
-    rating: 5,
-    text: {
-      es: 'Gran hotel boutique, tranquilo, perfecto para descansar. El dormitorio y el baño son grandes y cómodos. Recomiendo el primer piso: consigues la terraza.',
-      en: 'Great boutique hotel, quiet, perfect for resting. The bedroom and bathroom are large and comfortable. I recommend the first floor — you get the terrace.',
-    },
-  },
-  {
-    id: 'r5',
-    author: 'Vicente',
-    country: { es: 'España', en: 'Spain' },
-    platform: 'booking',
-    rating: 5,
-    text: {
-      es: 'La construcción combina lo tradicional con la comodidad en su justa medida. Te sientes en casa. Es realmente acogedor.',
-      en: 'The building combines the traditional with comfort in just the right measure. You feel at home. It is truly welcoming.',
-    },
-  },
-  {
-    id: 'r6',
-    author: 'Jamie Lee',
-    country: { es: 'Estados Unidos', en: 'United States' },
-    platform: 'expedia',
-    rating: 5,
-    text: {
-      es: 'Volvería aquí una y otra vez. Es una propiedad encantadora y el personal es excelente.',
-      en: 'I would come back here to stay over and over. It\'s a lovely property and the staff are excellent!',
-    },
-  },
-  {
-    id: 'r7',
-    author: 'KenA',
-    country: { es: 'Internacional', en: 'International' },
-    platform: 'tripadvisor',
-    rating: 5,
-    text: {
-      es: 'Tranquilo, gran servicio, terrenos maravillosos, gran relación calidad-precio.',
-      en: 'Quiet, great service, wonderful grounds, great value for money.',
-    },
-  },
-  {
-    id: 'r8',
-    author: 'Isabel',
-    country: { es: 'Panamá', en: 'Panama' },
-    platform: 'booking',
-    rating: 5,
-    text: {
-      es: 'El trato del personal fue sobresaliente. Tiene un jardín muy agradable — nos contaron que los higos de la mermelada son de cosecha propia.',
-      en: 'The staff treatment was outstanding. It has a lovely garden — they told us the figs in the jam are home-grown.',
     },
   },
 ];

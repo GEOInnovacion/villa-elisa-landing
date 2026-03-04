@@ -38,12 +38,6 @@ export default function Contact() {
               </a>
             </div>
             <div className={styles.infoItem}>
-              <span className={styles.infoLabel}>E-mail</span>
-              <a href={`mailto:${CONTACT_INFO.email}`} className={`${styles.infoValue} ${styles.infoLink}`}>
-                {CONTACT_INFO.email}
-              </a>
-            </div>
-            <div className={styles.infoItem}>
               <span className={styles.infoLabel}>{content.labelHours}</span>
               <span className={styles.infoValue}>{content.hours}</span>
             </div>

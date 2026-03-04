@@ -17,7 +17,7 @@ export type DnaPhoto = {
 export const DNA_PHOTOS: DnaPhoto[] = [
   {
     id: 'restaurante-museo',
-    photo: '/images/dna/restaurante-museo.jpg',
+    photo: '/images/dna/restaurante-museo.webp',
     alt: {
       es: 'Restaurante museo de Villa Elisa',
       en: 'Villa Elisa museum restaurant',
@@ -25,7 +25,7 @@ export const DNA_PHOTOS: DnaPhoto[] = [
   },
   {
     id: 'recepcion',
-    photo: '/images/dna/recepcion.jpg',
+    photo: '/images/dna/recepcion.webp',
     alt: {
       es: 'Recepción y salón principal',
       en: 'Reception and main hall',
@@ -33,7 +33,7 @@ export const DNA_PHOTOS: DnaPhoto[] = [
   },
   {
     id: 'fachada',
-    photo: '/images/dna/fachada.jpg',
+    photo: '/images/dna/fachada.webp',
     alt: {
       es: 'Fachada de la casona colonial',
       en: 'Colonial house facade',

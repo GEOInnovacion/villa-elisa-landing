@@ -10,8 +10,7 @@ export type RoomData = {
   category: Record<Lang, string>;
   description: Record<Lang, string>;
   amenities: Array<{ es: string; en: string; icon: string }>;
-  photo: string;
-  cloudbedsHref: string;
+  photos: string[];  // primera foto = imagen principal
 };
 
 // ─────────────────────────────────────────────
@@ -49,8 +48,7 @@ export const ROOMS: RoomData[] = [
       { icon: 'ShowerHead',   es: 'Ducha española 3 puntos', en: 'Spanish 3-point shower' },
       { icon: 'Coffee',       es: 'Desayuno buffet',         en: 'Buffet breakfast' },
     ],
-    photo: '/images/rooms/vip.jpg',
-    cloudbedsHref: 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd',
+    photos: ['/images/rooms/vip.webp', '/images/rooms/vip-2.webp'],
   },
   {
     id: 'matrimonial',
@@ -70,8 +68,7 @@ export const ROOMS: RoomData[] = [
       { icon: 'ShowerHead', es: 'Ducha',            en: 'Shower' },
       { icon: 'Coffee',     es: 'Desayuno buffet',  en: 'Buffet breakfast' },
     ],
-    photo: '/images/rooms/matrimonial.jpg',
-    cloudbedsHref: 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd',
+    photos: ['/images/rooms/matrimonial.webp', '/images/rooms/matrimonial-2.webp'],
   },
   {
     id: 'single',
@@ -91,8 +88,7 @@ export const ROOMS: RoomData[] = [
       { icon: 'ShowerHead', es: 'Ducha',            en: 'Shower' },
       { icon: 'Coffee',     es: 'Desayuno buffet',  en: 'Buffet breakfast' },
     ],
-    photo: '/images/rooms/single.jpg',
-    cloudbedsHref: 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd',
+    photos: ['/images/rooms/single.webp'],
   },
   {
     id: 'doble',
@@ -112,8 +108,7 @@ export const ROOMS: RoomData[] = [
       { icon: 'ShowerHead', es: 'Ducha',               en: 'Shower' },
       { icon: 'Coffee',     es: 'Desayuno buffet',     en: 'Buffet breakfast' },
     ],
-    photo: '/images/rooms/doble.jpg',
-    cloudbedsHref: 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd',
+    photos: ['/images/rooms/doble.webp', '/images/rooms/doble-2.webp'],
   },
   {
     id: 'family',
@@ -132,8 +127,7 @@ export const ROOMS: RoomData[] = [
       { icon: 'Wifi',       es: 'Wi-Fi',                    en: 'Wi-Fi' },
       { icon: 'Coffee',     es: 'Desayuno buffet',          en: 'Buffet breakfast' },
     ],
-    photo: '/images/rooms/family.jpg',
-    cloudbedsHref: 'https://us2.cloudbeds.com/es/reservation/N9kuZu?currency=usd',
+    photos: ['/images/rooms/family.webp', '/images/rooms/family-2.webp'],
   },
 ];
 

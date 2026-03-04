@@ -53,11 +53,11 @@ export const metadata: Metadata = {
     description:     seo.ogDesc,
     images: [
       {
-        url:    "/og-image.jpg",
+        url:    "/og-image.webp",
         width:  1200,
         height: 630,
         alt:    seo.ogImageAlt,
-        type:   "image/jpeg",
+        type:   "image/webp",
       },
     ],
   },

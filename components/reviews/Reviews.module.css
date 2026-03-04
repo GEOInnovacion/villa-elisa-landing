@@ -373,10 +373,10 @@
    TABLET (≤ 900px)
    ───────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .header { padding: 0 40px; }
+  .header    { padding: 0 40px; }
   .platforms { padding: 0 40px; }
   .platformCard { flex: 0 0 calc(50% - 6px); max-width: none; }
-  .divider { padding: 0 40px; }
+  .divider   { padding: 0 40px; }
   .carouselWrapper { padding: 0 52px; }
   .testimonials { grid-template-columns: 1fr 1fr; }
 }
@@ -390,23 +390,42 @@
   .header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 36px; }
   .title { font-size: clamp(30px, 9vw, 44px); }
 
-  .platforms { padding: 0 24px; gap: 10px; margin-bottom: 36px; }
-  .platformCard { flex: 0 0 calc(50% - 5px); max-width: none; }
+  /* Plataformas: scroll horizontal, una y media visible */
+  .platforms {
+    padding: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 36px;
+    scrollbar-width: none;
+  }
+  .platforms::-webkit-scrollbar { display: none; }
+
+  .platformCard {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+  }
 
   .scoreNumber { font-size: 44px; }
+  .scoreMax { font-size: 28px; }
 
   .divider { padding: 0 24px; }
 
+  /* Testimonios: 1 a la vez */
   .carouselWrapper { padding: 0 40px; }
   .testimonials { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .header { padding: 0 20px; }
-  .platforms { padding: 0 20px; }
-  .platformCard { flex: 0 0 calc(50% - 5px); }
-  .divider { padding: 0 20px; }
+  .header    { padding: 0 20px; }
+  .divider   { padding: 0 20px; }
   .carouselWrapper { padding: 0 36px; }
+  .platformCard { flex: 0 0 80vw; }
 }
 
 /* ─────────────────────────────────────────────────

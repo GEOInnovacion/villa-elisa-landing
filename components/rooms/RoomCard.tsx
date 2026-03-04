@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import * as LucideIcons from 'lucide-react';
 import type { RoomData } from './rooms.config';
@@ -15,8 +16,6 @@ function AmenityIcon({ name }: { name: string }) {
   return <Icon size={12} strokeWidth={1.75} aria-hidden="true" />;
 }
 
-// ─── Ícono flecha ─────────────────────────────────────────────────────────────
-
 function ArrowIcon() {
   return (
     <svg
@@ -31,8 +30,6 @@ function ArrowIcon() {
   );
 }
 
-// ─── Props ────────────────────────────────────────────────────────────────────
-
 type RoomCardProps = {
   room: RoomData;
   lang: Lang;
@@ -40,11 +37,11 @@ type RoomCardProps = {
   ctaLabel: string;
 };
 
-// ─── Componente ───────────────────────────────────────────────────────────────
-
 export default function RoomCard({ room, lang, index, ctaLabel }: RoomCardProps) {
-  const num = String(index + 1).padStart(2, '0');
+  const num    = String(index + 1).padStart(2, '0');
   const waHref = buildRoomWhatsappHref(room.name[lang], lang);
+  const photos = room.photos;
+  const [activePhoto, setActivePhoto] = useState(0);
 
   return (
     <article
@@ -53,18 +50,35 @@ export default function RoomCard({ room, lang, index, ctaLabel }: RoomCardProps)
       data-room-index={index}
       aria-label={room.name[lang]}
     >
-      {/* Imagen de fondo */}
+      {/* Imágenes — solo se muestra la activa */}
       <div className={styles.cardImageWrapper}>
-        <Image
-          src={room.photo}
-          alt={room.name[lang]}
-          fill
-          sizes="(max-width: 768px) 100vw, 400px"
-          className={styles.cardImage}
-          priority={index === 0}
-          quality={85}
-        />
+        {photos.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt={`${room.name[lang]} — foto ${i + 1}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className={`${styles.cardImage} ${i === activePhoto ? styles.cardImageActive : styles.cardImageHidden}`}
+            priority={index === 0 && i === 0}
+            quality={85}
+          />
+        ))}
       </div>
+
+      {/* Dots de fotos — solo si hay más de una */}
+      {photos.length > 1 && (
+        <div className={styles.photoDots} aria-label="Fotos de la habitación">
+          {photos.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.photoDot} ${i === activePhoto ? styles.photoDotActive : ''}`}
+              onClick={(e) => { e.stopPropagation(); setActivePhoto(i); }}
+              aria-label={`Foto ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Gradiente persistente */}
       <div className={styles.cardOverlay} aria-hidden="true" />
@@ -74,13 +88,9 @@ export default function RoomCard({ room, lang, index, ctaLabel }: RoomCardProps)
 
       {/* Panel de información */}
       <div className={styles.cardPanel}>
-        {/* Eyebrow — siempre visible */}
         <p className={styles.cardCategory}>{room.category[lang]}</p>
-
-        {/* Nombre — siempre visible */}
         <h3 className={styles.cardName}>{room.name[lang]}</h3>
 
-        {/* Contenido revelado en hover (mobile: siempre visible vía CSS) */}
         <div className={styles.cardRevealContent}>
           <p className={styles.cardDescription}>{room.description[lang]}</p>
 
