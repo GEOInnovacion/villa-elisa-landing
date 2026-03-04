@@ -59,15 +59,18 @@
    PLATAFORMAS — fila de 4 badges
    ───────────────────────────────────────────────── */
 .platforms {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto 52px;
   padding: 0 64px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
 .platformCard {
+  flex: 0 0 calc(33.333% - 8px);
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -137,7 +140,7 @@
 
 .scoreNumber {
   font-family: var(--font-title);
-  font-size: 40px;
+  font-size: 56px;
   font-weight: 300;
   font-style: italic;
   color: var(--color-tierra);
@@ -145,10 +148,12 @@
 }
 
 .scoreMax {
-  font-family: var(--font-label);
-  font-size: 11px;
-  color: rgba(74, 44, 23, 0.4);
-  letter-spacing: 0.5px;
+  font-family: var(--font-title);
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(74, 44, 23, 0.35);
+  letter-spacing: -0.01em;
 }
 
 /* Label + conteo */
@@ -214,12 +219,16 @@
 }
 
 /* ─────────────────────────────────────────────────
-   REVIEWS — fila de 3 testimonios
+   CARRUSEL DE TESTIMONIOS
    ───────────────────────────────────────────────── */
-.testimonials {
+.carouselWrapper {
+  position: relative;
   max-width: 1100px;
   margin: 0 auto 48px;
   padding: 0 64px;
+}
+
+.testimonials {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
@@ -307,14 +316,69 @@
   opacity: 0.7;
 }
 
+/* Flechas del carrusel */
+.carouselPrev,
+.carouselNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-crema);
+  border: 1px solid rgba(139, 94, 60, 0.2);
+  color: var(--color-arcilla);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.carouselPrev { left: 8px; }
+.carouselNext { right: 8px; }
+
+.carouselPrev:hover,
+.carouselNext:hover {
+  background: var(--color-sillar);
+  border-color: rgba(139, 94, 60, 0.4);
+}
+
+/* Dots */
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.carouselDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(139, 94, 60, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carouselDotActive {
+  background: var(--color-arcilla);
+  transform: scale(1.4);
+}
+
 /* ─────────────────────────────────────────────────
    TABLET (≤ 900px)
    ───────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .header { padding: 0 40px; }
-  .platforms { padding: 0 40px; grid-template-columns: repeat(2, 1fr); }
+  .platforms { padding: 0 40px; }
+  .platformCard { flex: 0 0 calc(50% - 6px); max-width: none; }
   .divider { padding: 0 40px; }
-  .testimonials { padding: 0 40px; grid-template-columns: 1fr 1fr; }
+  .carouselWrapper { padding: 0 52px; }
+  .testimonials { grid-template-columns: 1fr 1fr; }
 }
 
 /* ─────────────────────────────────────────────────
@@ -326,24 +390,23 @@
   .header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 36px; }
   .title { font-size: clamp(30px, 9vw, 44px); }
 
-  .platforms { padding: 0 24px; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 36px; }
+  .platforms { padding: 0 24px; gap: 10px; margin-bottom: 36px; }
+  .platformCard { flex: 0 0 calc(50% - 5px); max-width: none; }
 
-  .scoreNumber { font-size: 32px; }
+  .scoreNumber { font-size: 44px; }
 
   .divider { padding: 0 24px; }
 
-  .testimonials {
-    grid-template-columns: 1fr;
-    padding: 0 24px;
-    gap: 12px;
-  }
+  .carouselWrapper { padding: 0 40px; }
+  .testimonials { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
   .header { padding: 0 20px; }
   .platforms { padding: 0 20px; }
+  .platformCard { flex: 0 0 calc(50% - 5px); }
   .divider { padding: 0 20px; }
-  .testimonials { padding: 0 20px; }
+  .carouselWrapper { padding: 0 36px; }
 }
 
 /* ─────────────────────────────────────────────────
