@@ -1,0 +1,437 @@
+/* ===================================
+   REVIEWS — Villa Elisa
+   "Rankings & Comentarios"
+   Compacta, fondo blanco-sillar
+   =================================== */
+
+.reviews {
+  background: var(--color-blanco-sillar);
+  padding: 80px 0 72px;
+}
+
+/* ─────────────────────────────────────────────────
+   CABECERA
+   ───────────────────────────────────────────────── */
+.header {
+  max-width: 1100px;
+  margin: 0 auto 52px;
+  padding: 0 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-arcilla);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-arcilla);
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(34px, 3.5vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+}
+
+/* ─────────────────────────────────────────────────
+   PLATAFORMAS — fila de 4 badges
+   ───────────────────────────────────────────────── */
+.platforms {
+  max-width: 1000px;
+  margin: 0 auto 52px;
+  padding: 0 64px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.platformCard {
+  flex: 0 0 calc(33.333% - 8px);
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px;
+  border: 1px solid rgba(139, 94, 60, 0.13);
+  border-radius: 6px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.platformCard::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-dorado);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.platformCard:hover {
+  border-color: rgba(201, 169, 110, 0.4);
+  box-shadow: 0 8px 32px rgba(74, 44, 23, 0.08);
+  transform: translateY(-2px);
+}
+
+.platformCard:hover::before { transform: scaleX(1); }
+
+/* Logo + nombre */
+.platformTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.platformLogo {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.platformName {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-arcilla);
+}
+
+/* Score */
+.platformScore {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.scoreNumber {
+  font-family: var(--font-title);
+  font-size: 56px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  line-height: 1;
+}
+
+.scoreMax {
+  font-family: var(--font-title);
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(74, 44, 23, 0.35);
+  letter-spacing: -0.01em;
+}
+
+/* Label + conteo */
+.platformMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.scoreLabel {
+  font-family: var(--font-subtitle);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-tierra);
+}
+
+.reviewCount {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(74, 44, 23, 0.45);
+}
+
+/* Flecha de enlace */
+.platformArrow {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  color: rgba(74, 44, 23, 0.2);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.platformCard:hover .platformArrow {
+  color: var(--color-dorado);
+  transform: translate(2px, -2px);
+}
+
+/* ─────────────────────────────────────────────────
+   DIVISOR
+   ───────────────────────────────────────────────── */
+.divider {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(139, 94, 60, 0.12);
+}
+
+.dividerLabel {
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(74, 44, 23, 0.35);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────
+   CARRUSEL DE TESTIMONIOS
+   ───────────────────────────────────────────────── */
+.carouselWrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 64px;
+}
+
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.testimonialCard {
+  padding: 24px 22px;
+  border-radius: 6px;
+  background: var(--color-crema);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+/* Comilla decorativa */
+.testimonialCard::before {
+  content: '\201C';
+  font-family: var(--font-title);
+  font-size: 72px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-sillar);
+  line-height: 0.6;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Estrellas */
+.stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  color: var(--color-dorado);
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Texto */
+.testimonialText {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(74, 44, 23, 0.8);
+  flex: 1;
+}
+
+/* Autor */
+.testimonialAuthor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(139, 94, 60, 0.1);
+}
+
+.authorName {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-tierra);
+}
+
+.authorCountry {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(74, 44, 23, 0.45);
+}
+
+.authorPlatform {
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-arcilla);
+  opacity: 0.7;
+}
+
+/* Flechas del carrusel */
+.carouselPrev,
+.carouselNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-crema);
+  border: 1px solid rgba(139, 94, 60, 0.2);
+  color: var(--color-arcilla);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.carouselPrev { left: 8px; }
+.carouselNext { right: 8px; }
+
+.carouselPrev:hover,
+.carouselNext:hover {
+  background: var(--color-sillar);
+  border-color: rgba(139, 94, 60, 0.4);
+}
+
+/* Dots */
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.carouselDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(139, 94, 60, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.carouselDotActive {
+  background: var(--color-arcilla);
+  transform: scale(1.4);
+}
+
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 900px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .header    { padding: 0 40px; }
+  .platforms { padding: 0 40px; }
+  .platformCard { flex: 0 0 calc(50% - 6px); max-width: none; }
+  .divider   { padding: 0 40px; }
+  .carouselWrapper { padding: 0 52px; }
+  .testimonials { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 640px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .reviews { padding: 60px 0 56px; }
+
+  .header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 36px; }
+  .title { font-size: clamp(30px, 9vw, 44px); }
+
+  /* Plataformas: scroll horizontal, una y media visible */
+  .platforms {
+    padding: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 36px;
+    scrollbar-width: none;
+  }
+  .platforms::-webkit-scrollbar { display: none; }
+
+  .platformCard {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+  }
+
+  .scoreNumber { font-size: 44px; }
+  .scoreMax { font-size: 28px; }
+
+  .divider { padding: 0 24px; }
+
+  /* Testimonios: 1 a la vez */
+  .carouselWrapper { padding: 0 40px; }
+  .testimonials { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .header    { padding: 0 20px; }
+  .divider   { padding: 0 20px; }
+  .carouselWrapper { padding: 0 36px; }
+  .platformCard { flex: 0 0 80vw; }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .platformCard { transition: none; }
+  .platformCard::before { transition: none; }
+}

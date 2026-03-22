@@ -1,0 +1,472 @@
+/* ===================================
+   ROOMS — Villa Elisa
+   "Gallery Track"
+   Navegación por flechas ‹ ›
+   =================================== */
+
+/* ── Sección contenedora ─────────────────────────── */
+.rooms {
+  position: relative;
+}
+
+/* ── Viewport sticky ─────────────────────────────── */
+.stickyViewport {
+  position: sticky;
+  top: 0;
+  height: clamp(580px, 75vh, 820px);
+  overflow: hidden;
+  display: flex;
+}
+
+/* ─────────────────────────────────────────────────
+   PANEL IZQUIERDO
+   ───────────────────────────────────────────────── */
+.leftPanel {
+  width: 300px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 48px 0 64px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Línea vertical decorativa */
+.leftPanel::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(74, 44, 23, 0.15) 30%,
+    rgba(74, 44, 23, 0.15) 70%,
+    transparent
+  );
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-dorado);
+  opacity: 0.6;
+}
+
+.sectionTitle {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 2.8vw, 44px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgba(74, 44, 23, 0.6);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+/* Contador */
+.cardCounter {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: rgba(74, 44, 23, 0.4);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.counterCurrent {
+  font-size: 22px;
+  font-family: var(--font-title);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-arcilla);
+  line-height: 1;
+  transition: opacity 0.2s ease;
+}
+
+.counterSeparator { opacity: 0.4; }
+.counterTotal { font-size: 13px; }
+
+/* ── Flechas ────────────────────────────────────── */
+.arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.arrowBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(74, 44, 23, 0.2);
+  background: transparent;
+  color: var(--color-arcilla);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.arrowBtn:hover:not(:disabled) {
+  background: rgba(74, 44, 23, 0.06);
+  border-color: var(--color-arcilla);
+}
+
+.arrowBtn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ─────────────────────────────────────────────────
+   PANEL DERECHO — track de cards
+   ───────────────────────────────────────────────── */
+.rightPane {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.track {
+  display: flex;
+  gap: 20px;
+  padding: 24px 48px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  align-items: center;
+  /* Scrollbar invisible */
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar { display: none; }
+
+/* ─────────────────────────────────────────────────
+   CARD individual
+   ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 340px;
+  height: 500px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover {
+  transform: scale(1.015);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+}
+
+/* Número decorativo top-right */
+.cardNumber {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(250, 246, 241, 0.45);
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* Imagen de fondo */
+.cardImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cardImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+}
+
+.cardImageHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cardImageActive {
+  opacity: 1;
+}
+
+.card:hover .cardImageActive {
+  transform: scale(1.06);
+}
+
+/* Dots de fotos */
+.photoDots {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  display: flex;
+  gap: 5px;
+}
+
+.photoDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.photoDotActive {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.3);
+}
+
+/* Gradiente sobre imagen — se intensifica al hover */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 2, 0.95) 0%,
+    rgba(20, 8, 2, 0.65) 45%,
+    rgba(20, 8, 2, 0.20) 75%,
+    transparent 100%
+  );
+  transition: background 0.52s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 2, 0.97) 0%,
+    rgba(20, 8, 2, 0.82) 55%,
+    rgba(20, 8, 2, 0.40) 80%,
+    rgba(20, 8, 2, 0.10) 100%
+  );
+}
+
+/* Panel — slide up al hover */
+.cardPanel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 24px 28px;
+  transform: translateY(calc(100% - 88px));
+  transition: transform 0.52s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardPanel,
+.card:focus-within .cardPanel {
+  transform: translateY(0);
+}
+
+.cardCategory {
+  font-family: var(--font-label);
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-bottom: 6px;
+}
+
+.cardName {
+  font-family: var(--font-subtitle);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-blanco-sillar);
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+.cardRevealContent {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.38s ease 0.15s, transform 0.38s ease 0.15s;
+  margin-top: 16px;
+}
+
+.card:hover .cardRevealContent,
+.card:focus-within .cardRevealContent {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardDescription {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(250, 246, 241, 0.92);
+  line-height: 1.65;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.cardAmenities {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.cardAmenity {
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(250, 246, 241, 0.55);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardAmenityIcon {
+  font-size: 11px;
+  line-height: 1;
+  color: var(--color-dorado);
+  opacity: 0.85;
+  flex-shrink: 0;
+  font-style: normal;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--color-arcilla);
+  border: none;
+  border-radius: 3px;
+  color: var(--color-blanco-sillar);
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.cardCta:hover {
+  background: var(--color-tierra);
+  transform: translateY(-1px);
+}
+
+.cardCtaText { position: relative; }
+
+.cardCtaIcon {
+  transition: transform 0.25s ease;
+}
+
+.cardCta:hover .cardCtaIcon { transform: translateX(3px); }
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 768px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .rooms {
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .stickyViewport {
+    position: static;
+    height: auto;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .leftPanel {
+    width: 100%;
+    padding: 64px 28px 28px;
+  }
+
+  .leftPanel::after { display: none; }
+
+  .sectionTitle { font-size: clamp(28px, 8vw, 40px); }
+
+  .rightPane { overflow: visible; }
+
+  .track {
+    padding: 0 7.5vw 32px;
+    gap: 15vw;
+    height: auto;
+  }
+
+  .card {
+    width: 85vw;
+    height: 72svh;
+    min-height: 460px;
+    border-radius: 8px;
+    scroll-snap-align: center;
+  }
+
+  .card:hover { transform: none; }
+
+  /* Panel siempre visible en mobile */
+  .cardPanel { transform: translateY(0) !important; }
+  .cardRevealContent { opacity: 1 !important; transform: translateY(0) !important; }
+}
+
+@media (max-width: 480px) {
+  .leftPanel { padding: 56px 20px 24px; }
+  .arrows { margin-bottom: 8px; }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cardPanel { transform: translateY(0) !important; transition: none; }
+  .cardRevealContent { opacity: 1 !important; transform: none !important; transition: none; }
+  .card { transition: none; }
+  .cardImage { transition: none; }
+}

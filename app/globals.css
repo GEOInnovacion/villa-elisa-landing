@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&family=Montserrat:wght@300;500&display=swap');
+
+:root {
+  /* Paleta Villa Elisa — Sillar Contemporáneo */
+  --color-sillar: #D4B896;
+  --color-arcilla: #8B5E3C;
+  --color-tierra: #4A2C17;
+  --color-crema: #F5EDE0;
+  --color-blanco-sillar: #FAF6F1;
+  --color-dorado: #C9A96E;
+  --color-verde: #5A7A5A;
+
+  /* Tipografías */
+  --font-title: 'Cormorant Garamond', Georgia, serif;
+  --font-subtitle: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-label: 'Montserrat', system-ui, sans-serif;
+
+  /* Background / foreground heredados */
+  --background: var(--color-blanco-sillar);
+  --foreground: var(--color-tierra);
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,342 @@
+/* ===================================
+   SERVICES — Villa Elisa
+   Bento grid: texto siempre visible,
+   cada carta tiene su propio escenario
+   =================================== */
+
+.services {
+  background: var(--color-tierra);
+  padding: 100px 0 96px;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────
+   CABECERA
+   ───────────────────────────────────────────────── */
+.header {
+  max-width: 1280px;
+  margin: 0 auto 56px;
+  padding: 0 64px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.headerLeft { display: flex; flex-direction: column; }
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-dorado);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-dorado);
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(48px, 5.5vw, 80px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-blanco-sillar);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(250, 246, 241, 0.45);
+  max-width: 300px;
+  text-align: right;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────────
+   BENTO GRID — 2 columnas × 3 filas
+   Col izquierda: 1, 3, 5
+   Col derecha:   2, 4, 6
+   ───────────────────────────────────────────────── */
+.grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 280px 280px 280px;
+  gap: 10px;
+}
+
+/* Restaurante */
+.card:nth-child(1) { grid-column: 1; grid-row: 1; }
+
+/* Piscina */
+.card:nth-child(2) { grid-column: 2; grid-row: 1; }
+
+/* Reuniones */
+.card:nth-child(3) { grid-column: 1; grid-row: 2; }
+
+/* Bodas */
+.card:nth-child(4) { grid-column: 2; grid-row: 2; }
+
+/* Sesión fotos */
+.card:nth-child(5) { grid-column: 1; grid-row: 3; }
+
+/* Tours moto */
+.card:nth-child(6) { grid-column: 2; grid-row: 3; }
+
+/* ─────────────────────────────────────────────────
+   CARD BASE
+   ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate;
+  transition: box-shadow 0.5s ease, outline-color 0.4s ease;
+  outline: 1.5px solid transparent;
+  outline-offset: -1.5px;
+}
+
+.card:hover {
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.6);
+  outline-color: color-mix(in srgb, var(--accent, #C9A96E) 50%, transparent);
+}
+
+/* Imagen */
+.cardImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cardImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardImage { transform: scale(1.07); }
+
+/* ─── Overlay: siempre oscuro abajo, más en hover ─── */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 4, 1, 0.15) 0%,
+    rgba(10, 4, 1, 0.62) 50%,
+    rgba(10, 4, 1, 0.95) 100%
+  );
+  transition: background 0.5s ease;
+  pointer-events: none;
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    160deg,
+    rgba(10, 4, 1, 0.15) 0%,
+    rgba(10, 4, 1, 0.65) 45%,
+    rgba(10, 4, 1, 0.95) 100%
+  );
+}
+
+/* ─── Contenido siempre visible ───────────────────── */
+.cardContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.cardTag {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent, var(--color-dorado));
+  opacity: 1;
+  margin-bottom: 7px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+.cardTitle {
+  font-family: var(--font-subtitle);
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Todas las cards tienen el mismo tamaño de título */
+
+/* ─── Descripción: visible por defecto, desaparece sutilmente al no hover ─── */
+.cardDescription {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: rgba(250, 246, 241, 0.72);
+  line-height: 1.65;
+  max-width: 420px;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Todas las cards: mismas líneas de descripción */
+
+/* ─── CTAs ────────────────────────────────────────── */
+.cardActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btnWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: #25D366;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.btnWhatsapp:hover { background: #1ebe5b; transform: translateY(-1px); }
+
+.btnDownload {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--accent, #C9A96E) 45%, transparent);
+  border-radius: 3px;
+  color: var(--accent, var(--color-dorado));
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.btnDownload:hover {
+  background: var(--accent, var(--color-dorado));
+  border-color: var(--accent, var(--color-dorado));
+  color: var(--color-tierra);
+  transform: translateY(-1px);
+}
+
+.btnIcon { flex-shrink: 0; }
+
+/* ─── Número de servicio decorativo (esquina sup. derecha) ─── */
+.cardNumber {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(250, 246, 241, 0.25);
+  z-index: 2;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 1024px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .header { padding: 0 40px; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .subtitle { text-align: left; max-width: 100%; }
+
+  .grid {
+    padding: 0 40px;
+    grid-template-rows: 240px 240px 240px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 768px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .services { padding: 72px 0 64px; }
+  .header { padding: 0 24px; margin-bottom: 40px; }
+  .title { font-size: clamp(40px, 11vw, 60px); }
+
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(2),
+  .card:nth-child(3),
+  .card:nth-child(4),
+  .card:nth-child(5),
+  .card:nth-child(6) {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .header { padding: 0 16px; }
+  .grid { padding: 0 16px; }
+  .btnWhatsapp, .btnDownload { font-size: 7.5px; padding: 8px 12px; }
+}
+
+/* ─────────────────────────────────────────────────
+   REDUCED MOTION
+   ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cardImage { transition: none; }
+  .card { transition: none; }
+  .btnWhatsapp, .btnDownload { transition: none; }
+}

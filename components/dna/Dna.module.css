@@ -1,0 +1,293 @@
+/* ===================================
+   DNA — Villa Elisa
+   Split layout: texto izq · carrusel der
+   =================================== */
+
+.dna {
+  background: var(--color-crema);
+  color: var(--color-tierra);
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────
+   CONTENEDOR PRINCIPAL — dos columnas
+   ───────────────────────────────────────────────── */
+.body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 640px;
+}
+
+/* ─────────────────────────────────────────────────
+   COLUMNA IZQUIERDA — texto + historia
+   ───────────────────────────────────────────────── */
+.textCol {
+  padding: 80px 64px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--color-arcilla);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--color-arcilla);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: clamp(48px, 5vw, 88px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  white-space: pre-line;
+  margin-bottom: 40px;
+}
+
+/* Separador fino */
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--color-arcilla);
+  opacity: 0.35;
+  margin-bottom: 28px;
+}
+
+.epigraphText {
+  font-family: var(--font-title);
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-tierra);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.epigraphAuthor {
+  font-family: var(--font-label);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-arcilla);
+  opacity: 0.7;
+  margin-bottom: 36px;
+}
+
+.paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.paragraph {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.82;
+  color: rgba(74, 44, 23, 0.78);
+}
+
+.paragraphClosing {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.82;
+  color: var(--color-arcilla);
+  font-style: italic;
+}
+
+/* ─────────────────────────────────────────────────
+   COLUMNA DERECHA — carrusel
+   ───────────────────────────────────────────────── */
+.carouselCol {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-tierra);
+}
+
+/* Track de slides */
+.carouselTrack {
+  display: flex;
+  height: 100%;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.18, 1);
+  will-change: transform;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
+}
+
+/* Sutil zoom en slide activo */
+.slide.active .photo {
+  transform: scale(1.04);
+}
+
+/* Overlay degradado suave en el borde izquierdo */
+.carouselCol::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 80px;
+  background: linear-gradient(to right, var(--color-crema), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Label flotante */
+.slideLabel {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-family: var(--font-label);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(250, 246, 241, 0.65);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────
+   CONTROLES — dots + flechas
+   ───────────────────────────────────────────────── */
+.controls {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 4;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(250, 246, 241, 0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot.dotActive {
+  background: rgba(250, 246, 241, 0.9);
+  transform: scale(1.4);
+}
+
+/* Flechas prev / next */
+.arrowPrev,
+.arrowNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(250, 246, 241, 0.1);
+  border: 1px solid rgba(250, 246, 241, 0.2);
+  color: rgba(250, 246, 241, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.arrowPrev { left: 16px; }
+.arrowNext { right: 16px; }
+
+.arrowPrev:hover,
+.arrowNext:hover {
+  background: rgba(250, 246, 241, 0.2);
+  border-color: rgba(250, 246, 241, 0.45);
+}
+
+/* Contador de slide */
+.slideCounter {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(250, 246, 241, 0.5);
+  z-index: 4;
+}
+
+/* ─────────────────────────────────────────────────
+   TABLET (≤ 1024px)
+   ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .textCol {
+    padding: 64px 40px 64px 56px;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   MOBILE (≤ 768px) — apilado vertical
+   ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .body {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  /* Carrusel arriba en mobile */
+  .carouselCol {
+    order: -1;
+    height: 56vw;
+    min-height: 260px;
+  }
+
+  .carouselCol::before { display: none; }
+
+  .textCol {
+    padding: 48px 24px 56px;
+  }
+
+  .title { font-size: clamp(40px, 11vw, 60px); margin-bottom: 28px; }
+}
+
+@media (max-width: 480px) {
+  .textCol { padding: 40px 20px 48px; }
+  .carouselCol { height: 64vw; }
+}
